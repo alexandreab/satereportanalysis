@@ -19,13 +19,12 @@ sub new {
 }
 
 sub extract_report {
-  my ($self) = @_;
+  my ($self, @cwe_ids) = @_;
 
   my $parser = XML::Parser->new(ErrorContext => 2, Style => "Tree");
   my $xso = XML::SimpleObject->new( $parser->parsefile($self->{'file_path'}) );
 
   my @tools = ( "cppcheck", "ldra", "monoidics", "parasoft", "redlizard");
-  my @cwe_ids = (121, 122, 124, 126, 127);
 
   my $tool;
   foreach (@tools) {
