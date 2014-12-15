@@ -33,13 +33,12 @@ sub calculate {
   my @table_values = to_table($tool,'values');
   my @table_metrics = to_table($tool,'metrics');
 
-
   my $output = new Output();
 
   print $output->to_latex(@table_values);
   print "\n\n";
   print $output->to_latex(@table_metrics);
-
+  
 }
 
 sub measures {
@@ -84,18 +83,28 @@ sub to_table {
   my @line = ();
   my @values = ();
 
-  push @line, "Ferramenta/Valor";
 
   #TODO sort order of elements
   foreach (keys $data->{$tool_name}->{$type})
   {
-    push @line, $_;
     push @values, $_;
   }
 
+  @values = sort @values;
+
+  @line = @values;
+  unshift @line, "Ferramenta/Valor";
+
   push @table, [@line];
 
+  my @tools_names = ();
   foreach my $tool_alias (keys %$data) {
+    push @tools_names, $tool_alias;
+  }
+
+  @tools_names = sort @tools_names;
+
+  foreach my $tool_alias (@tools_names) {
     @line = ();
     push @line, $tool_alias;
 
