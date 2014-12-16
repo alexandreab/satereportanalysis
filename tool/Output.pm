@@ -7,16 +7,20 @@ sub new {
   my ($class) = @_;
   my $self = {};
   bless($self,$class);
+
+  $self->{'counter'} = 0;
   
   return $self;
 }
 
 
 sub to_latex {
-  my ($self,@table) = @_;
+  my ($self, $table_title, @table) = @_;
 
   my $tool_name;
   my $columns;
+
+  my $table_label = "tabreport_$self->{counter}";
 
   my $table_latex;
 
@@ -27,7 +31,7 @@ sub to_latex {
 
   $table_values_header .= "\\begin{table}[h]\n";
   $table_values_header .= "\t\\centering\n";
-  $table_values_header .= "\t\\label{tabtools}\n";
+  $table_values_header .= "\t\\label{$table_label}\n";
 
   my $reference = $table[0];
   my @first_line = @$reference;
@@ -47,7 +51,7 @@ sub to_latex {
   }
   $table_values_foot .= "\t\t\\bottomrule\n";
   $table_values_foot .= "\t\\end{tabular}\n";
-  $table_values_foot .= "\t\\caption{Ferramentas Analisadas no SATE IV utilizadas nesse trabalho}\n";
+  $table_values_foot .= "\t\\caption{$table_title}\n";
   $table_values_foot .= "\\end{table}\n";
 
   $table_values = $table_values_header.$table_values_body.$table_values_foot;
@@ -57,7 +61,7 @@ sub to_latex {
 }
 
 sub to_csv {
-  my ($self,@table) = @_;
+  my ($self, $table_title, @table) = @_;
   my $table_values = "";
 
   foreach my $line_ref (@table) {

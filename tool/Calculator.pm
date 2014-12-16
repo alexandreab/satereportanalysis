@@ -18,10 +18,9 @@ sub new {
 }
 
 sub calculate {
-  my ($self) = @_;
-  my @cwe_ids = (121, 122, 124, 126, 127);
-
+  my ($self, $report_name, @cwe_ids) = @_;
   my $tool;
+
   $tool = $self->{'report_extractor'}->extract_report(@cwe_ids);
 
   my @tools = ( "cppcheck", "ldra", "monoidics", "parasoft", "redlizard");
@@ -35,9 +34,9 @@ sub calculate {
 
   my $output = new Output();
 
-  print $output->to_latex(@table_values);
+  print $output->to_latex($report_name, @table_values);
   print "\n\n";
-  print $output->to_latex(@table_metrics);
+  print $output->to_latex($report_name, @table_metrics);
   
 }
 
