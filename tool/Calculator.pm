@@ -18,7 +18,7 @@ sub new {
 }
 
 sub calculate {
-  my ($self, $report_name, @cwe_ids) = @_;
+  my ($self, @cwe_ids) = @_;
   my $tool;
 
   $tool = $self->{'report_extractor'}->extract_report(@cwe_ids);
@@ -34,10 +34,7 @@ sub calculate {
 
   my $output = new Output();
 
-  print $output->to_latex($report_name, @table_values);
-  print "\n\n";
-  print $output->to_latex($report_name, @table_metrics);
-  
+  return (\@table_values, \@table_metrics);
 }
 
 sub measures {
@@ -82,8 +79,6 @@ sub to_table {
   my @line = ();
   my @values = ();
 
-
-  #TODO sort order of elements
   foreach (keys $data->{$tool_name}->{$type})
   {
     push @values, $_;
