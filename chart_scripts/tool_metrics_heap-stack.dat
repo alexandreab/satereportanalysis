@@ -1,0 +1,9 @@
+#				2		3			4		5			6		7			8		9			10		11			12
+#
+#				Cppcheck			Ldra				Monoidics			Parasoft        	Redlizard
+#				Heap	Stack		Heap	Stack		Heap	Stack		Heap	Stack		Heap	Stack		First
+Precisão		1		0.72093		0.64706	0		 	0.86207	0.92143		1		1			0.51692	0.5    		1
+Recall			0.00543	0.01918		0.00373	0		 	0.09335	0.0798		0.28513	0.25982		0.11405	0.04763		2
+"Discrim Rate"	0.00543	0.01175		0.00204	0		 	0.07841	0.073		0.28513	0.25982		0.00747	0      		3
+F-Score			0.0108	0.03736		0.00742	0			0.16845	0.14688		0.44374	0.41247		0.18687	0.08698		4
+
