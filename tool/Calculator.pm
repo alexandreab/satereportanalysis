@@ -19,9 +19,7 @@ sub new {
 
 sub calculate {
   my ($self, @cwe_ids) = @_;
-  my $tool;
-
-  $tool = $self->{'report_extractor'}->extract_report(@cwe_ids);
+  my ($total_files, $tool) = $self->{'report_extractor'}->extract_report(@cwe_ids);
 
   my @tools = ( "cppcheck", "ldra", "monoidics", "parasoft", "redlizard");
 
@@ -34,7 +32,7 @@ sub calculate {
 
   my $output = new Output();
 
-  return (\@table_values, \@table_metrics);
+  return ($total_files, \@table_values, \@table_metrics);
 }
 
 sub measures {

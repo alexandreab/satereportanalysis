@@ -1,5 +1,7 @@
 package Output;
 
+use List::Util qw[ max ];
+
 use strict;
 use warnings;
 
@@ -69,6 +71,31 @@ sub to_csv {
     my $latex_line = "";
     $latex_line = join(',', @line)." \n";
     $table_values .= $latex_line;
+  }
+
+  return $table_values;
+}
+
+sub to_gnuplot {
+  my ($self, $table_title, @table) = @_;
+  my $table_values = "";
+
+  my @trans = map {
+      my $index = $_;
+      [ map{ $_->[ $index ] } @table ];
+  } 1 .. max map{ $#$_ } @table;
+
+  my $count = 0;
+  foreach my $line_ref (@trans) {
+    my $gnuplot_line = "";
+    if($count == 0) {
+      $gnuplot_line .= "# ";
+      $count++;
+    }
+
+    my ($attribute, @line) = @$line_ref;
+    $gnuplot_line = join("\t", @line)."\t# ".$attribute." \n";
+    $table_values .= $gnuplot_line;
   }
 
   return $table_values;

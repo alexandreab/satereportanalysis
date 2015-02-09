@@ -78,8 +78,7 @@ sub extract_report {
     }
   }
 
-  print "Total de arquivos analisados: $total_files\n";
-  return $tool;
+  return ($total_files,$tool);
 }
 
 1;
