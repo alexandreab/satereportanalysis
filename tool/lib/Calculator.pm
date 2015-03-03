@@ -3,8 +3,8 @@ package Calculator;
 use strict;
 use warnings;
 
-use lib::ReportExtractor;
-use lib::Output;
+use ReportExtractor;
+use Output;
 use Data::Dumper;
 
 sub new {

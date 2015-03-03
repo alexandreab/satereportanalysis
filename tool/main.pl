@@ -3,8 +3,10 @@ use warnings;
 
 use Data::Dumper;
 
-use lib::Calculator;
-use lib::Output;
+use lib 'lib';
+
+use Calculator;
+use Output;
 
 my @cwe_ids = ();
 my $calc = new Calculator("data/synthetic-c.xml");
