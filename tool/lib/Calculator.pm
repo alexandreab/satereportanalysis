@@ -18,10 +18,10 @@ sub new {
 }
 
 sub calculate {
-  my ($self, @cwe_ids) = @_;
-  my ($total_files, $tool) = $self->{'report_extractor'}->extract_report(@cwe_ids);
-
-  my @tools = ( "cppcheck", "ldra", "monoidics", "parasoft", "redlizard");
+  my ($self, $ref_cwe_ids, $ref_tools) = @_;
+  my @cwe_ids = @{$ref_cwe_ids};
+  my @tools = @{$ref_tools};
+  my ($total_files, $tool) = $self->{'report_extractor'}->extract_report(\@cwe_ids, \@tools);
 
   foreach (@tools) {
     measures($_ , $tool->{$_});

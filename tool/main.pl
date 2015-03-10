@@ -13,9 +13,10 @@ my $calc = new Calculator("data/synthetic-c.xml");
 
 my $output = new Output();
 
+my @tools = ( "cppcheck", "ldra", "monoidics", "parasoft", "redlizard");
 {
   @cwe_ids = (126,127);
-  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(@cwe_ids);
+  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(\@cwe_ids,\@tools);
   my @values = @$values_ref;
   my @metrics = @$metrics_ref;
   print $output->to_latex("Buffer Overflows relacionados a Leitura de Buffer - Valores",@values);
@@ -26,7 +27,7 @@ my $output = new Output();
 
 {
   @cwe_ids = (124);
-  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(@cwe_ids);
+  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(\@cwe_ids,\@tools);
   my @values = @$values_ref;
   my @metrics = @$metrics_ref;
   print $output->to_latex("Buffer Overflows relacionados a Escrita de Buffer - Valores",@values);
@@ -37,7 +38,7 @@ my $output = new Output();
 
 {
   @cwe_ids = (124,127);
-  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(@cwe_ids);
+  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(\@cwe_ids,\@tools);
   my @values = @$values_ref;
   my @metrics = @$metrics_ref;
   print $output->to_latex("Buffer Overflows relacionados ao Limite Inicial do Buffer - Valores",@values);
@@ -48,7 +49,7 @@ my $output = new Output();
 
 {
   @cwe_ids = (126);
-  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(@cwe_ids);
+  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(\@cwe_ids,\@tools);
   my @values = @$values_ref;
   my @metrics = @$metrics_ref;
   print $output->to_latex("Buffer Overflows relacionados ao Limite Final do Buffer - Valores",@values);
@@ -60,7 +61,7 @@ my $output = new Output();
  
 {
   @cwe_ids = (121);
-  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(@cwe_ids);
+  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(\@cwe_ids,\@tools);
   my @values = @$values_ref;
   my @metrics = @$metrics_ref;
   print $output->to_latex("Buffer Overflows relacionados a Buffers em Heap - Valores",@values);
@@ -71,7 +72,7 @@ my $output = new Output();
 
 {
   @cwe_ids = (122);
-  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(@cwe_ids);
+  my ($total_files, $values_ref, $metrics_ref) = $calc->calculate(\@cwe_ids,\@tools);
   my @values = @$values_ref;
   my @metrics = @$metrics_ref;
   print $output->to_latex("Buffer Overflows relacionados a Buffers em Stack - Valores",@values);
