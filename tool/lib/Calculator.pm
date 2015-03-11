@@ -35,6 +35,24 @@ sub calculate {
   return ($total_files, \@table_values, \@table_metrics);
 }
 
+sub compare {
+  my ($self, $ref_cwe_ids, $ref_tools) = @_;
+  my @cwe_ids = @{$ref_cwe_ids};
+  my @tools = @{$ref_tools};
+  my ($total_files, $tool) = $self->{'report_extractor'}->extract_pair_report(\@cwe_ids, \@tools);
+
+  foreach (@tools) {
+    measures($_ , $tool->{$_});
+  }
+
+  my @table_values = to_table($tool,'values');
+  my @table_metrics = to_table($tool,'metrics');
+
+  my $output = new Output();
+
+  return ($total_files, \@table_values, \@table_metrics);
+}
+
 sub measures {
   my ($tool_name, $data_tool) = @_;
   my $reports = $data_tool->{'values'};
